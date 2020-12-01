@@ -18,7 +18,7 @@ Behind this API there are several important components such as:
 - Object Relational Mapper
 - Engine, Database and Session
 
-Just after this point, you can find an statisc data analysis, with the following outcomes:
+Just after this point, you can find an statiscal data analysis, with the following outcomes:
 
 - Precipitation evolution per day:
 
