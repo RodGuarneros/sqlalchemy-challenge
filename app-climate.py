@@ -1,20 +1,15 @@
 
-from flask import Flask, jsonify
 from sqlalchemy import func
 import datetime as dt
 import numpy as np
 import pandas as pd
 import sqlalchemy
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func, inspect
 
 # lets reflect tables into a SQLAlchemy ORM
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 # reflect an existing database into a new model
 Base = automap_base()
-# reflect the tables
-Base.prepare(engine, reflect=True)
 # Save references to each table
 Measurement = Base.classes.measurement
 Station = Base.classes.station
@@ -172,20 +167,6 @@ def start(start):
     print ("Server received a GET request from a start date ...")
     return jsonify(start_list)
 
-# sixth endpoint
-@app.route("/api/v1.0/<start>/<end>")
-def start_end(start, end):
-    session = Session(engine)
-# giving format to input    
-    start_dt = str(start)
-    end_dt = str(end)
-    E = (
-        session
-        .query(func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs))
-        .filter(Measurement.date>=start_dt)
-        .filter(Measurement.date<=end_dt)
-        .all()
-        )
    # making the key in the dictionary previous of jsonify
     start_end_list = []
     
